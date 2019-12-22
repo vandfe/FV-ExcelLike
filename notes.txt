@@ -1,0 +1,11 @@
+column width
+max width
+min width
+sortable
+filterable
+add row at last
+add row at first
+add row in the middle
+delete row
+row color
+put data in row
