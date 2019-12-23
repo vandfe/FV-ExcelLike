@@ -1,0 +1,38 @@
+.el-header-wrapper,
+.el-lines-wrapper {
+    margin: auto;
+    width: 100%;
+}
+
+.el-header-wrapper {
+    margin-bottom: -2px;
+}
+
+.el-header-wrapper table,
+.el-lines-wrapper table {
+    width: 100%;
+    border-spacing: 0;
+    border-top: 1px solid transparent;
+    border-left: 1px solid transparent;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+
+.el-header-wrapper table tr th,
+.el-lines-wrapper table tr td {
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    padding: 5px;
+
+}
+
+.el-header-wrapper table tr th {
+    background-color: #f3f3f3;
+}
+
+.el-lines-wrapper table tr td:first-child {
+    background-color: #f3f3f3;
+    text-align: center;
+}
