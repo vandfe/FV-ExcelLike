@@ -16,6 +16,7 @@
     border-left: 1px solid transparent;
     border-right: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    table-layout: fixed;
 }
 
 .el-header-wrapper table tr th,
@@ -25,14 +26,25 @@
     border-right: 1px solid transparent;
     border-bottom: 1px solid transparent;
     padding: 5px;
-
 }
 
 .el-header-wrapper table tr th {
     background-color: #f3f3f3;
+    cursor: pointer;
 }
 
 .el-lines-wrapper table tr td:first-child {
     background-color: #f3f3f3;
     text-align: center;
+}
+
+.headertext {
+    position: relative;
+    z-index: 10;
+}
+
+.headerspan {
+    position: relative;
+    float: right;
+    z-index: 1;
 }

@@ -9,6 +9,7 @@
         this.divLinesWrapper = null;
         this.divLines = null;
         this.data = null;
+        this.InitDataSate = null;
 
         // Define option defaults
         var defaults = {
@@ -24,31 +25,7 @@
     }
 
     // Public Methods
-
-    ExcelLike.prototype.open = function () {
-        // Build out our Modal
-        buildOut.call(this);
-
-        // Initialize our event listeners
-        initializeEvents.call(this);
-
-        /*
-         * After adding elements to the DOM, use getComputedStyle
-         * to force the browser to recalc and recognize the elements
-         * that we just added. This is so that CSS animation has a start point
-         */
-        window.getComputedStyle(this.modal).height;
-
-        /*
-         * Add our open class and check if the modal is taller than the window
-         * If so, our anchored class is also applied
-         */
-        this.modal.className = this.modal.className +
-            (this.modal.offsetHeight > window.innerHeight ?
-                " scotch-open scotch-anchored" : " scotch-open");
-        this.overlay.className = this.overlay.className + " scotch-open";
-    }
-
+    // Methods to test the plugin
     ExcelLike.prototype.test = function () {
         createHeader.call(this);
         createLines.call(this);
@@ -68,11 +45,12 @@
         local_cell_number.style.width = '25px';
         local_row.appendChild(local_cell_number);
 
-        var cpt = 0;
+        var cpt = 1;
         this.options.headerList.forEach(function (headerText) {
             var th = document.createElement('th');
-            th.innerHTML = headerText;
+            th.innerHTML = '<span class="headertext">' + headerText + '</span><span class="headerspan"></span>';
             th.className = 'header_cell_' + cpt;
+            InitEventHeader(th);
             local_row.appendChild(th);
             cpt++;
         });
@@ -92,20 +70,24 @@
 
         local_table = document.createElement('table');
 
-        var cpt = 0;
+        this.InitDataSate = this.options.data;
+
+        var row = 1;
         this.options.data.forEach(function (line) {
             local_row = document.createElement('tr');
+            local_row.className = 'el-row' + row;
             cell_num = document.createElement('td');
-            cell_num.innerHTML = cpt;
+            cell_num.innerHTML = row;
             cell_num.style.width = '25px';
             local_row.appendChild(cell_num);
-            for (i = 0; i < line.length; i++) {
+            for (col = 0; col < line.length; col++) {
                 local_cell = document.createElement('td');
-                local_cell.innerHTML = line[i];
+                local_cell.innerHTML = line[col];
+                local_cell.className = 'el-cell_line' + row + '_col' + (col + 1);
                 local_row.appendChild(local_cell);
             }
             local_table.appendChild(local_row);
-            cpt++;
+            row++;
         });
 
         this.divLines = local_table;
@@ -115,16 +97,19 @@
         container[0].appendChild(this.divLinesWrapper);
     }
 
-    function initializeEvents() {
+    function InitEventHeader(element) {
+        element.addEventListener('click', function () {
+            OrderTable(element.className);
+        });
+    }
 
-        if (this.closeButton) {
-            this.closeButton.addEventListener('click', this.close.bind(this));
-        }
+    function OrderTable(className) {
+        SetSortLabel(className);
+    }
 
-        if (this.overlay) {
-            this.overlay.addEventListener('click', this.close.bind(this));
-        }
-
+    function SetSortLabel(className) {
+        span = document.getElementsByClassName(className)[0].getElementsByTagName('span')[1];
+        span.innerHTML = 'test';
     }
 
     // Utility method to extend defaults with user options
