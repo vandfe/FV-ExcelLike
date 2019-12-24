@@ -109,7 +109,21 @@
 
     function SetSortLabel(className) {
         span = document.getElementsByClassName(className)[0].getElementsByTagName('span')[1];
-        span.innerHTML = 'test';
+        if (span.innerHTML === '↑') {
+            span.innerHTML = '↓';
+            document.getElementsByClassName(className)[0].style.textDecoration = 'underline';
+            document.getElementsByClassName(className)[0].style.backgroundImage = 'url("arrowdown.svg")';
+        }
+        else if (span.innerHTML === '↓') {
+            span.innerHTML = '';
+            document.getElementsByClassName(className)[0].style.textDecoration = 'none';
+            document.getElementsByClassName(className)[0].style.backgroundImage = '';
+        }
+        else {
+            span.innerHTML = '↑';
+            document.getElementsByClassName(className)[0].style.textDecoration = 'underline';
+            document.getElementsByClassName(className)[0].style.backgroundImage = 'url("arrowup.svg")';
+        }
     }
 
     // Utility method to extend defaults with user options
